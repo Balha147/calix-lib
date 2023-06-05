@@ -5,8 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CalixShowFormErrorsComponent } from './components/calix-show-form-errors/calix-show-form-errors.component';
 
-
-
 @NgModule({
   declarations: [
     CalixInputComponent,
@@ -15,7 +13,7 @@ import { CalixShowFormErrorsComponent } from './components/calix-show-form-error
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     CalixInputComponent,

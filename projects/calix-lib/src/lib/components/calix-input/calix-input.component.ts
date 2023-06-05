@@ -29,24 +29,27 @@ export class CalixInputComponent implements ControlValueAccessor {
   set value(value: string) {
     if (value !== this.innerValue) {
       this.innerValue = value;
-      this.onChangeCallback(this.innerValue);
-      this.valueChange.emit(this.innerValue);
+      this.onChangeCallback(this.innerValue); // rappel `onChangeCallback` pour informer les autres composants du changement de valeur
+      this.valueChange.emit(this.innerValue); // emettre la nouvelle valeur
     }
   }
 
+  /**
+   * concaténer la valeur par le prefix `calix-`
+   * @param event
+   */
   onInputChange(event: Event) {
-    const value = (event.target as HTMLInputElement).value.trim();
+    const { value } = event.target as HTMLInputElement;
     if (value === 'calix-') {
       this.value = '';
-    } else if (!value.startsWith('calix-')) {
-      this.value = value ? `calix-${value}` : '';
     } else {
-      this.value = value;
+      const trimmedValue = value.trim();
+      const startsWithCalix = trimmedValue.startsWith('calix-');
+      this.value = startsWithCalix ? trimmedValue : `calix-${trimmedValue}`;
     }
   }
 
-
-
+  /*--------------- Start ControlValueAccessor ------------------*/
   writeValue(value: any) {
     if (value !== this.innerValue) {
       this.innerValue = value;
@@ -60,8 +63,9 @@ export class CalixInputComponent implements ControlValueAccessor {
   registerOnTouched(fn: any) {
     this.onTouchedCallback = fn;
   }
+ /*--------------- End ControlValueAccessor ------------------*/
 
-  private onChangeCallback: (_: any) => void = () => {};
+  private onChangeCallback: (_: any) => void = () => {}; // un rappel appelé lorsqu'il y a un changement de valeur
 
-  onTouchedCallback: () => void = () => {};
+  onTouchedCallback: () => void = () => {}; // rappel appelé lorsqu'il y a une interaction de l'utilisateur
 }

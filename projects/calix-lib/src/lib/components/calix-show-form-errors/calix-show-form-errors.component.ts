@@ -19,6 +19,9 @@ export class CalixShowFormErrorsComponent {
     max: (param: any) => `Veuillez saisir une valeur inférieure ou égale à: ${param.max}`,
   };
 
+  /**
+   * Getter le message d'erreur correspondant au type d'erreur
+   */
   private getErrorMessage(type: string, params: any): string {
     if (this.customErrorMessages && this.customErrorMessages[type]) {
       return this.customErrorMessages[type](params);
@@ -27,6 +30,9 @@ export class CalixShowFormErrorsComponent {
     }
   }
 
+  /**
+   * Détermine s'il faut afficher les erreurs
+   */
   shouldShowErrors(): boolean {
     return (
       this.control &&
@@ -35,6 +41,9 @@ export class CalixShowFormErrorsComponent {
     ) ?? false;
   }
 
+  /**
+   * Envoie une liste des messages d'erreur
+   */
   listOfErrors(): string[] {
     const errors = this.control?.errors ?? {};
     return Object.keys(errors).map((field) => this.getErrorMessage(field, errors[field]));
