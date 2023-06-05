@@ -1,0 +1,9 @@
+<ng-container *ngIf="shouldShowErrors()">
+  <div class="error-container">
+    <i [ngClass]="icon"></i>
+    <ng-container *ngFor="let error of listOfErrors()">
+      <div [innerHTML]="error"></div>
+      <br/>
+      </ng-container>
+  </div>
+</ng-container>

@@ -1,0 +1,21 @@
+{
+  "name": "calix-lib",
+  "version": "1.0.8",
+  "description": "calix lib",
+  "author": {
+    "name": "Mohamed Hedi Basly",
+    "email": "baslymohamedhedi@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Balha147/calix-lib.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
