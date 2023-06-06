@@ -1,4 +1,7 @@
 .error-container {
   display: flex;
   color: red;
+  i {
+    margin-right: 12px;
+  }
 }

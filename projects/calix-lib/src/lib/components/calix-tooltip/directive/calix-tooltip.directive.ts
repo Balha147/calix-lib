@@ -11,6 +11,7 @@ import { CalixTooltipEnum } from '../enum/calix-tooltip';
 
 @Directive({
   selector: '[calixTooltip]',
+  standalone: true,
 })
 export class CalixTooltipDirective implements OnInit {
   @Input('calixTooltip') text: string = ''; // texte à afficher dans le tooltip

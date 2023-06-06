@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalixInputModel } from './model/calix-input.model';
+import { NgIf } from '@angular/common';
+import { FormBaseDirective } from '../../shared/form-base.directive';
 
 @Component({
   selector: 'calix-input',
@@ -10,62 +12,25 @@ import { CalixInputModel } from './model/calix-input.model';
     { provide: NG_VALUE_ACCESSOR, useExisting: CalixInputComponent, multi: true },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf],
 })
-export class CalixInputComponent implements ControlValueAccessor {
+export class CalixInputComponent extends FormBaseDirective<string> {
   @Input() options: CalixInputModel = {
     label: '',
     readonly: false,
     placeholder: 'Placeholder',
   };
 
-  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
-
-  private innerValue = '';
-
-  get value(): string {
-    return this.innerValue;
-  }
-
-  set value(value: string) {
-    if (value !== this.innerValue) {
-      this.innerValue = value;
-      this.onChangeCallback(this.innerValue); // rappel `onChangeCallback` pour informer les autres composants du changement de valeur
-      this.valueChange.emit(this.innerValue); // emettre la nouvelle valeur
-    }
-  }
-
-  /**
-   * concaténer la valeur par le prefix `calix-`
-   * @param event
-   */
   onInputChange(event: Event) {
     const { value } = event.target as HTMLInputElement;
-    if (value === 'calix-') {
-      this.value = '';
-    } else {
-      const trimmedValue = value.trim();
-      const startsWithCalix = trimmedValue.startsWith('calix-');
-      this.value = startsWithCalix ? trimmedValue : `calix-${trimmedValue}`;
-    }
+    const trimmedValue = value.trim();
+    const newValue =
+      trimmedValue === 'calix-'
+        ? ''
+        : trimmedValue.startsWith('calix-')
+        ? trimmedValue
+        : `calix-${trimmedValue}`;
+    this.value = newValue;
   }
-
-  /*--------------- Start ControlValueAccessor ------------------*/
-  writeValue(value: any) {
-    if (value !== this.innerValue) {
-      this.innerValue = value;
-    }
-  }
-
-  registerOnChange(fn: any) {
-    this.onChangeCallback = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouchedCallback = fn;
-  }
- /*--------------- End ControlValueAccessor ------------------*/
-
-  private onChangeCallback: (_: any) => void = () => {}; // un rappel appelé lorsqu'il y a un changement de valeur
-
-  onTouchedCallback: () => void = () => {}; // rappel appelé lorsqu'il y a une interaction de l'utilisateur
 }

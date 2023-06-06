@@ -18,9 +18,11 @@ describe('CalixTooltipDirective', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        CalixTooltipDirective,
         TestCalixTooltipComponent,
       ],
+      imports: [
+        CalixTooltipDirective,
+      ]
     }).compileComponents();
   });
 

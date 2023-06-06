@@ -1,3 +1,4 @@
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
@@ -5,6 +6,8 @@ import { AbstractControl } from '@angular/forms';
   selector: 'calix-show-form-errors',
   templateUrl: './calix-show-form-errors.component.html',
   styleUrls: ['./calix-show-form-errors.component.scss'],
+  standalone: true,
+  imports: [NgClass, NgIf, NgFor],
 })
 export class CalixShowFormErrorsComponent {
   @Input() control!: AbstractControl | null;

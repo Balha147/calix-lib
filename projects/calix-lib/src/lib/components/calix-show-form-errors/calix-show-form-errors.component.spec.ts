@@ -8,9 +8,6 @@ describe('CalixShowFormErrorsComponent', () => {
   let fixture: ComponentFixture<CalixShowFormErrorsComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [CalixShowFormErrorsComponent]
-    });
     fixture = TestBed.createComponent(CalixShowFormErrorsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

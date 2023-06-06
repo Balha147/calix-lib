@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalixInputComponent } from './calix-input.component';
-import { FormsModule } from '@angular/forms';
-import { CalixTooltipDirective } from '../calix-tooltip/directive/calix-tooltip.directive';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
@@ -12,10 +10,7 @@ describe('CalixInputComponent', () => {
   let inputElement: DebugElement;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [CalixInputComponent, CalixTooltipDirective],
-      imports: [FormsModule],
-    });
+
     fixture = TestBed.createComponent(CalixInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges(); // Trigger initial change detection
