@@ -4,6 +4,7 @@
   class="form-control"
   [value]="value"
   (input)="onInputChange($event)"
+  (blur)="onBlur()"
   [readonly]="options.readonly"
   [placeholder]="options.placeholder"
 />

@@ -33,4 +33,8 @@ export class CalixInputComponent extends FormBaseDirective<string> {
         : `calix-${trimmedValue}`;
     this.value = newValue;
   }
+
+  onBlur() {
+    this.onTouched();
+  }
 }

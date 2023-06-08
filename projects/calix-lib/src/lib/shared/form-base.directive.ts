@@ -13,7 +13,7 @@ export abstract class FormBaseDirective<T> implements ControlValueAccessor {
 
   set value(value: T) {
     this.innerValue = value;
-    this.onChangeCallback(this.innerValue);
+    this.onChange(this.innerValue);
     this.valueChange.emit(this.innerValue);
   }
 
@@ -25,15 +25,19 @@ export abstract class FormBaseDirective<T> implements ControlValueAccessor {
     this.valueChange.emit(this.value);
   }
 
-  registerOnChange(fn: any) {
-    this.onChangeCallback = fn;
+  registerOnChange(onChange: (value: T) => void): void {
+    this.onChange = onChange;
   }
 
-  registerOnTouched(fn: any) {
-    this.onTouchedCallback = fn;
+  registerOnTouched(onTouched: () => void): void {
+    this.onTouched = onTouched;
   }
 
-  private onChangeCallback: (_: any) => void = () => {};
+  onChange = (value: T): void => {
+    /* needed by angular */
+  };
 
-  private onTouchedCallback: () => void = () => {};
+  onTouched: () => void = () => {
+    /* needed by angular */
+  };
 }
